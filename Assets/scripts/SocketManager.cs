@@ -14,7 +14,7 @@ public class SocketManager : MonoBehaviour {
         public string msg;
     };
 
-    public string serverURL = "35.225.170.214";
+    public string serverURL = "http://35.225.150.27";
 
     public InputField uiInput = null;
     public Button uiSend = null;
@@ -23,7 +23,7 @@ public class SocketManager : MonoBehaviour {
     protected Socket socket = null;
     protected List<string> chatLog = new List<string>();
 
-    void Destroy()
+    void OnDestroy()
     {
         DoClose();
     }
@@ -41,8 +41,9 @@ public class SocketManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+       // Debug.Log("var=" + var);
         
-        lock (chatLog)
+       /* lock (chatLog)
         {
             if (chatLog.Count > 0)
             {
@@ -51,10 +52,11 @@ public class SocketManager : MonoBehaviour {
                 {
                     str = str + "\n" + s;
                 }
-                uiChatLog.text = str;
+                //uiChatLog.text = str;
+                Debug.Log("str"+str);
                 chatLog.Clear();
             }
-        }
+        }*/
         
     }
 
@@ -71,21 +73,24 @@ public class SocketManager : MonoBehaviour {
         {
             socket = IO.Socket(serverURL);
 
-           
-            
             socket.On(Socket.EVENT_CONNECT, () => {
                 Debug.Log("gibrish");
             });
             
             socket.On("chat message", (data) => {
-                string str = data.ToString();
+            //   string str = data.ToString();
 
                 //ChatData chat = JsonConvert.DeserializeObject<ChatData>(str);
                 //string strChatLog = "user#" + chat.id + ": " + chat.msg;
 
                 // Access to Unity UI is not allowed in a background thread, so let's put into a shared variable
                 Debug.Log("gibrish2");
-                Debug.Log(data.ToString()[0].GetHashCode());
+                //Debug.Log(data.ToString()[0].GetHashCode());
+
+           //   lock (chatLog)
+           //     {
+            //        chatLog.Add(str);
+             //   }
             });
             
         }
@@ -96,6 +101,7 @@ public class SocketManager : MonoBehaviour {
         if (socket != null)
         {
             socket.Disconnect();
+            Debug.Log("disconnect");
             socket = null;
         }
     }
@@ -106,5 +112,11 @@ public class SocketManager : MonoBehaviour {
         {
             socket.Emit("chat", str);
         }
+    }
+
+    void OnApplicationQuit()
+    {
+        Debug.Log("quit");
+        Destroy(this.gameObject);
     }
 }
