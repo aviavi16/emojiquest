@@ -9,13 +9,13 @@ public class GameManager : MonoBehaviour {
     public GameObject winUi;
 
     public int stage;
-    public int expectedNumber;
-    public int[] maxNum={3,3};
+
     public Transform cam;
     public AnimationCurve curve;
 
-    private List<Clickable> goodClicked = new List<Clickable>();
-    // Use this for initialization
+
+
+    public List<StageDef> stages;
 
     void Start () {
         
@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour {
         if (instance != null)
             throw new System.Exception("singelton not null");
         instance = this;
-        expectedNumber = 0;
         stage = 0;
         winUi.SetActive(false);
     }
@@ -38,25 +37,13 @@ public class GameManager : MonoBehaviour {
 
     public void NotifyClicked(Clickable c)
     {
-        if (goodClicked.Contains(c))
+        if (stage >= stages.Count)
             return;
-        if (c.number == expectedNumber)
-        {
-            c.DoAction();
-            ++expectedNumber;
-            goodClicked.Add(c);
-            if (expectedNumber == maxNum[stage])
-                WinStage();
-        } else
-        {
-            foreach (Clickable gc in goodClicked)
-            {
-                gc.UndoAction();
-            }
-            goodClicked.Clear();
-            expectedNumber = 0;
-        }
-
+        StageDef sdef = stages[stage];
+        sdef.NotifyClicked(c);
+        if (sdef.IsDone())
+            WinStage();
+       
 
     }
 
@@ -65,10 +52,7 @@ public class GameManager : MonoBehaviour {
 
     private void WinStage()
     {
-        if (stage == maxNum.Length)
-            ;
-        else
-            StartCoroutine(MoveStage());    
+       StartCoroutine(MoveStage());    
     }
 
     IEnumerator MoveStage()
@@ -79,6 +63,7 @@ public class GameManager : MonoBehaviour {
         float pos = 0;
         float initX = 0 + stage * 20;
         float endX = initX + 20;
+        ++stage; 
         while (pos<1)
         {
             Vector3 p = cam.transform.position;
