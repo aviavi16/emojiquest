@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 
     public Transform cam;
     public AnimationCurve curve;
-
+    public SocketManager socketManager;
 
 
     public List<StageDef> stages;
@@ -25,10 +25,17 @@ public class GameManager : MonoBehaviour {
         instance = this;
         stage = 0;
         winUi.SetActive(false);
+        socketManager=GetComponent<SocketManager>();
+         }
+
+    public void ReadyToPlay()
+    {
+        stages[0].Emit();
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene(0);
@@ -63,8 +70,8 @@ public class GameManager : MonoBehaviour {
         float pos = 0;
         float initX = 0 + stage * 20;
         float endX = initX + 20;
-        ++stage; 
-        while (pos<1)
+        ++stage;
+        while (pos < 1)
         {
             Vector3 p = cam.transform.position;
             float w = curve.Evaluate(pos);
@@ -72,6 +79,8 @@ public class GameManager : MonoBehaviour {
             pos += 0.02f;
             yield return null;
         }
+        if (stage<stages.Count)
+            stages[stage].Emit();
     }
 
 }

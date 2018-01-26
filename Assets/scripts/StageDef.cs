@@ -6,6 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public class StageDef  {
 
+    public string toSend;
+
     [System.Serializable]
     public class Substage
     {
@@ -56,6 +58,18 @@ public class StageDef  {
         return substage >= substages.Length;
     }
 
+    
+
+    public void Emit()
+    {
+        Debug.Log("emitted");
+        GameManager.instance.socketManager.socket.Emit("mission", new string[] { toSend});
+    }
+
+
+    /** Notify that a clickable was clicked. It handles all changes in clicable objects.
+     *  Later call IsDone() to see if this stage is done.
+     * */
     public void NotifyClicked(Clickable c)
     {
         if (substage >= substages.Length)
