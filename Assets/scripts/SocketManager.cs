@@ -19,8 +19,10 @@ public class SocketManager : MonoBehaviour {
     public InputField uiInput = null;
     public Button uiSend = null;
     public Text uiChatLog = null;
+    public bool ready = false;
+    public bool notified = false;
 
-    protected Socket socket = null;
+    public Socket socket = null;
     protected List<string> chatLog = new List<string>();
 
     void OnDestroy()
@@ -41,9 +43,20 @@ public class SocketManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-       // Debug.Log("var=" + var);
-        
-       lock (chatLog)
+        if (ready && !notified)
+        {
+            GameManager.instance.ReadyToPlay();
+            notified = true;
+        }
+        // Debug.Log("var=" + var);
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            socket.Emit("mission", new string[] { "Hello"+Time.time});
+            Debug.Log("emitted");
+        }
+
+        lock (chatLog)
         {
             if (chatLog.Count > 0)
             {
@@ -77,7 +90,8 @@ public class SocketManager : MonoBehaviour {
             socket = IO.Socket(serverURL);
 
             socket.On(Socket.EVENT_CONNECT, () => {
-                Debug.Log("gibrish");
+                Debug.Log("ready");
+                ready = true;
             });
             
             socket.On("chat message", (data) => {
@@ -95,7 +109,9 @@ public class SocketManager : MonoBehaviour {
                     chatLog.Add(str);
                }
             });
-            
+
+
+           
         }
     }
 
