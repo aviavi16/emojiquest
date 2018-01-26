@@ -17,21 +17,17 @@ public class StageDef  {
         {
             for (int i = 0; i < step; ++i)
             {
-                Debug.Log(" reset " + i);
                 toActivate[i].UndoAction();
             }
-            Debug.Log("res");
             step = 0;
         }
 
         internal bool NotifyClicked(Clickable c)
         {
-            Debug.Log("step=" + step);
             if (step < toActivate.Length && c==toActivate[step]) {
             
                 ++step;
                 c.DoAction();
-                Debug.Log("step2=" + step);
                 return true;
             }
             return false;
@@ -71,7 +67,7 @@ public class StageDef  {
         {
             if (sstage.IsDone())
             {
-                Debug.Log("MV");
+             
                 ++substage;
             }
         }
