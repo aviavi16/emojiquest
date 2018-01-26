@@ -43,20 +43,23 @@ public class SocketManager : MonoBehaviour {
     {
        // Debug.Log("var=" + var);
         
-       /* lock (chatLog)
+       lock (chatLog)
         {
             if (chatLog.Count > 0)
             {
+                
                 string str = uiChatLog.text;
                 foreach (var s in chatLog)
+
                 {
+                    Debug.Log("chatLog " + s);
                     str = str + "\n" + s;
                 }
                 //uiChatLog.text = str;
-                Debug.Log("str"+str);
+                
                 chatLog.Clear();
             }
-        }*/
+        }
         
     }
 
@@ -78,19 +81,19 @@ public class SocketManager : MonoBehaviour {
             });
             
             socket.On("chat message", (data) => {
-            //   string str = data.ToString();
+             string str = data.ToString();
 
                 //ChatData chat = JsonConvert.DeserializeObject<ChatData>(str);
                 //string strChatLog = "user#" + chat.id + ": " + chat.msg;
 
                 // Access to Unity UI is not allowed in a background thread, so let's put into a shared variable
-                Debug.Log("gibrish2");
+                Debug.Log("gibrish2 "+str);
                 //Debug.Log(data.ToString()[0].GetHashCode());
 
-           //   lock (chatLog)
-           //     {
-            //        chatLog.Add(str);
-             //   }
+             lock (chatLog)
+              {
+                    chatLog.Add(str);
+               }
             });
             
         }
