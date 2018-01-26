@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
     public int stage;
     public int expectedNumber;
     public int[] maxNum={3,3};
+    public Transform cam;
+    public AnimationCurve curve;
 
     private List<Clickable> goodClicked = new List<Clickable>();
     // Use this for initialization
@@ -62,13 +64,25 @@ public class GameManager : MonoBehaviour {
         if (stage == maxNum.Length)
             ;
         else
-            StartCoroutine(MoveStage());
+            StartCoroutine(MoveStage());    
     }
 
     IEnumerator MoveStage()
     {
         winUi.SetActive(true);
-        return null; 
+        yield return new WaitForSeconds(0.5f);
+        winUi.SetActive(false);
+        float pos = 0;
+        float initX = 0 + stage * 20;
+        float endX = initX + 20;
+        while (pos<1)
+        {
+            Vector3 p = cam.transform.position;
+            float w = curve.Evaluate(pos);
+            cam.transform.position = new Vector3(Mathf.Lerp(initX, endX, w), p.y, p.z);
+            pos += 0.02f;
+            yield return null;
+        }
     }
 
 }
