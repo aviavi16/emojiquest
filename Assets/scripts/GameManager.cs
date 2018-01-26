@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
 
-
+    public GameObject winUi;
 
     public int stage;
     public int expectedNumber;
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
         instance = this;
         expectedNumber = 0;
         stage = 0;
+        winUi.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -38,12 +39,15 @@ public class GameManager : MonoBehaviour {
             c.DoAction();
             ++expectedNumber;
             goodClicked.Add(c);
+            if (expectedNumber == maxNum[stage])
+                WinStage();
         } else
         {
             foreach (Clickable gc in goodClicked)
             {
                 gc.UndoAction();
             }
+            goodClicked.Clear();
             expectedNumber = 0;
         }
 
@@ -53,9 +57,18 @@ public class GameManager : MonoBehaviour {
     
     
 
-    public void Win()
+    private void WinStage()
     {
-        Debug.Log("Win");
+        if (stage == maxNum.Length)
+            ;
+        else
+            StartCoroutine(MoveStage());
+    }
+
+    IEnumerator MoveStage()
+    {
+        winUi.SetActive(true);
+        return null; 
     }
 
 }

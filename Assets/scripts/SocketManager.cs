@@ -31,6 +31,7 @@ public class SocketManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        Debug.Log("start connect");
         DoOpen();
         Debug.Log("start");
 
@@ -40,6 +41,7 @@ public class SocketManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        
         lock (chatLog)
         {
             if (chatLog.Count > 0)
@@ -53,6 +55,7 @@ public class SocketManager : MonoBehaviour {
                 chatLog.Clear();
             }
         }
+        
     }
 
     void OnMessage(Socket socket)
