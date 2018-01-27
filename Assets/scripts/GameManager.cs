@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     private Clickable targetClickable = null;
 
     private float lastClickTime = -1;
-
+    private int wonStages = 0;
 
 
     public List<StageDef> stages;
@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void NotifyClicked(Clickable c)
     {
+        Debug.Log("note " + c.name + " stage="+stage);
         if (binocular.gameObject.activeSelf)
             return;
 
@@ -128,15 +129,14 @@ public class GameManager : MonoBehaviour
         if (Time.time - lastClickTime < 0.5f)
             return;
         lastClickTime = Time.time;
-        if (stage == 0)
-        {
+  
             StageDef sdef = stages[stage];
             sdef.NotifyClicked(c);
-            if (stage == 0 && sdef.IsDone())
+            if (sdef.IsDone() && wonStages<=stage)
             {
                 WinStage();
             }
-        }
+     
         
     }
 
@@ -150,14 +150,18 @@ public class GameManager : MonoBehaviour
 
     IEnumerator MoveStage()
     {
+        ++wonStages;
         yield return new WaitForSeconds(2f);
         successUi.SetActive(true);
         if (stage == 0)
             maxX = 30;
-
+        
         yield return new WaitForSeconds(2f);
         successUi.SetActive(false);
-
+        ++stage;
+        Debug.Log("inc stage " + stage);
+        if (stage<stages.Count)
+           stages[stage].Emit();
         //  SceneManager.LoadScene("title");
         /*winUi.SetActive(false);
         float pos = 0;
