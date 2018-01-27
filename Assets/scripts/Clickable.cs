@@ -16,10 +16,10 @@ public class Clickable : MonoBehaviour {
 
     }
 
-    void OnMouseDown()
-    {
-        GameManager.instance.NotifyClicked(this);
-    }
+   // void OnMouseDown()
+ //   {
+       // GameManager.instance.NotifyClicked(this);
+//    }
 
 
     virtual public void DoAction() { }
