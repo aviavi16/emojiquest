@@ -52,7 +52,7 @@ public class SocketManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            socket.Emit("mission", new string[] { "Hello"+Time.time});
+            socket.Emit("mission", new string[] { "hit the tree 3 times"});
             Debug.Log("emitted");
         }
 

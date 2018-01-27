@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour {
 
     public void ReadyToPlay()
     {
-        stages[0].Emit();
+        //stages[0].Emit();
 
     }
 
@@ -64,9 +64,12 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator MoveStage()
     {
+        yield return new WaitForSeconds(2f);
         winUi.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        winUi.SetActive(false);
+        yield return new WaitForSeconds(5f);
+
+        SceneManager.LoadScene("title");
+        /*winUi.SetActive(false);
         float pos = 0;
         float initX = 0 + stage * 20;
         float endX = initX + 20;
@@ -81,6 +84,7 @@ public class GameManager : MonoBehaviour {
         }
         if (stage<stages.Count)
             stages[stage].Emit();
+            */
     }
 
 }

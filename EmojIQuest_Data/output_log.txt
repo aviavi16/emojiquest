@@ -1,0 +1,49 @@
+Initialize engine version: 5.6.1f1 (2860b30f0b54)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics Family (ID=0xa16)
+    Vendor:   Intel
+    VRAM:     1136 MB
+    Driver:   20.19.15.4531
+Begin MonoManager ReloadAssembly
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\Projects\gamejam2018\EmojIQuest_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\Projects\gamejam2018\EmojIQuest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\Projects\gamejam2018\EmojIQuest_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading E:\Projects\gamejam2018\EmojIQuest_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading E:\Projects\gamejam2018\EmojIQuest_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\Newtonsoft.Json.dll (this message is harmless)
+Loading E:\Projects\gamejam2018\EmojIQuest_Data\Managed\Newtonsoft.Json.dll into Unity Child Domain
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\SocketIoClientDotNet.dll (this message is harmless)
+Loading E:\Projects\gamejam2018\EmojIQuest_Data\Managed\SocketIoClientDotNet.dll into Unity Child Domain
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\WebSocket4Net.dll (this message is harmless)
+Loading E:\Projects\gamejam2018\EmojIQuest_Data\Managed\WebSocket4Net.dll into Unity Child Domain
+- Completed reload, in  0.069 seconds
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\System.dll (this message is harmless)
+desktop: 1366x768 60Hz; virtual: 2390x946 at -1024,-178
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 4.129289 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 15.845502 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 627.
+Total: 0.759513 ms (FindLiveObjects: 0.075540 ms CreateObjectMapping: 0.083341 ms MarkObjects: 0.589546 ms  DeleteObjects: 0.009442 ms)
+
+start connect
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+start
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Platform assembly: E:\Projects\gamejam2018\EmojIQuest_Data\Managed\Mono.Security.dll (this message is harmless)
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
