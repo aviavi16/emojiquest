@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 
             bool close = Mathf.Abs(mainChar.transform.position.x - ray.origin.x) < 1f;
             if (FindClickable(ray))
-                if (close)
+                if (close && targetClickable.GetComponent<DigClickable>()==null)
                     ReachedTarget();
                 else
                     mainChar.SetGoTo(ray.origin.x);
