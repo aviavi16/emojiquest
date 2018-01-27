@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainChar : MonoBehaviour {
 
-
+    public Transform flipper;
     private float targetX;
     private bool moveMode = false;
     public float vel = 0.2f;
@@ -25,9 +25,14 @@ public class MainChar : MonoBehaviour {
         float x = p.x;
         float diff = targetX-x;
 
+        float s = Mathf.Sign(diff);
+        if (s == 0) s = 1;
 
-        
+        flipper.localScale = new Vector3(s, 1, 1);
+
         float tvel = vel * Time.deltaTime;
+
+       
      //   Debug.Log("x=" + x + " tvel=" + tvel+" targetX="+targetX);
         if (Mathf.Abs(diff) <= tvel)
         {
