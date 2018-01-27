@@ -20,7 +20,7 @@ public class DigClickable : Clickable {
         Vector3 p = anim.transform.position;
         anim.transform.position = new Vector3(x, p.y, p.z);
         anim.SetActive(true);
-        if (Mathf.Abs(chest.transform.position.x -1- x) < 1)
+        if (Mathf.Abs(chest.transform.position.x -1- x) < 0.5f)
         {
             chest.SetActive(true);
             GameManager.instance.NotifyWin();
