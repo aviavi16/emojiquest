@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public float cameraLeftBorder=0;
     public float cameraRightBorder = 100;
     public int stage;
+    public BinacularScript binocular;
 
     public Camera cam;
     public AnimationCurve curve;
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     public MainChar mainChar;
 
     private Clickable targetClickable = null;
+
+    private float lastClickTime = -1;
 
     public List<StageDef> stages;
 
@@ -40,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void ReadyToPlay()
     {
-        //stages[0].Emit();
+        stages[0].Emit();
 
     }
 
@@ -53,6 +56,9 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
+           
+            if (binocular.gameObject.activeSelf)
+                return;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
             bool close = Mathf.Abs(mainChar.transform.position.x - ray.origin.x) < 1f;
@@ -94,12 +100,26 @@ public class GameManager : MonoBehaviour
 
     public void NotifyClicked(Clickable c)
     {
+        if (binocular.gameObject.activeSelf)
+            return;
+
         if (stage >= stages.Count)
              return;
+
+        if (c.GetComponent<ShovelClickable>())
+        {
+            Destroy(c.gameObject);
+        }
+
+        if (Time.time - lastClickTime < 0.5f)
+            return;
+        lastClickTime = Time.time;
          StageDef sdef = stages[stage];
          sdef.NotifyClicked(c);
-         if (sdef.IsDone())
-             WinStage();
+        if (sdef.IsDone())
+        {
+            WinStage();
+        }
 
         
     }

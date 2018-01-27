@@ -13,10 +13,11 @@ public class BinacularScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!hidden && socketManager.SentFirstMessage())
+        if ((!hidden && socketManager.SentFirstMessage()) || Input.GetKeyDown(KeyCode.B))
         {
             hidden = true;
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
+           // Destroy(this.gameObject);
         }
 	}
 }
