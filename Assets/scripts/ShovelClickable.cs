@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShovelClickable : MonoBehaviour {
+public class ShovelClickable : Clickable {
    
 
 }

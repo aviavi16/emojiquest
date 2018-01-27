@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public GameObject winUi;
+    public GameObject successUi;
 
     public float cameraLeftBorder=0;
     public float cameraRightBorder = 100;
@@ -18,10 +20,13 @@ public class GameManager : MonoBehaviour
     public AnimationCurve curve;
     public SocketManager socketManager;
     public MainChar mainChar;
+    public GameObject shovel;
 
     private Clickable targetClickable = null;
 
     private float lastClickTime = -1;
+
+
 
     public List<StageDef> stages;
 
@@ -31,14 +36,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
-
         if (instance != null)
             throw new System.Exception("singelton not null");
         instance = this;
         stage = 0;
         winUi.SetActive(false);
+        successUi.SetActive(false);
         socketManager = GetComponent<SocketManager>();
+        shovel.SetActive(false);
     }
 
     public void ReadyToPlay()
@@ -93,7 +98,7 @@ public class GameManager : MonoBehaviour
 
 
         targetClickable = c;
-        Debug.Log("hit");
+        Debug.Log("hit "+c.name);
         return true;
     }
 
@@ -109,18 +114,29 @@ public class GameManager : MonoBehaviour
         if (c.GetComponent<ShovelClickable>())
         {
             Destroy(c.gameObject);
+            shovel.SetActive(true);
+            return;
+        }
+
+        if (c.GetComponent<DigClickable>() )
+        {
+            if (shovel.activeSelf)
+               c.GetComponent<DigClickable>().Dig(mainChar.transform.position.x);
+            return;
         }
 
         if (Time.time - lastClickTime < 0.5f)
             return;
         lastClickTime = Time.time;
-         StageDef sdef = stages[stage];
-         sdef.NotifyClicked(c);
-        if (sdef.IsDone())
+        if (stage == 0)
         {
-            WinStage();
+            StageDef sdef = stages[stage];
+            sdef.NotifyClicked(c);
+            if (stage == 0 && sdef.IsDone())
+            {
+                WinStage();
+            }
         }
-
         
     }
 
@@ -135,13 +151,48 @@ public class GameManager : MonoBehaviour
     IEnumerator MoveStage()
     {
         yield return new WaitForSeconds(2f);
-        winUi.SetActive(true);
+        successUi.SetActive(true);
         if (stage == 0)
             maxX = 30;
 
-        yield return new WaitForSeconds(5f);
-       
-      //  SceneManager.LoadScene("title");
+        yield return new WaitForSeconds(2f);
+        successUi.SetActive(false);
+
+        //  SceneManager.LoadScene("title");
+        /*winUi.SetActive(false);
+        float pos = 0;
+        float initX = 0 + stage * 20;
+        float endX = initX + 20;
+        ++stage;
+        while (pos < 1)
+        {
+            Vector3 p = cam.transform.position;
+            float w = curve.Evaluate(pos);
+            cam.transform.position = new Vector3(Mathf.Lerp(initX, endX, w), p.y, p.z);
+            pos += 0.02f;
+            yield return null;
+        }
+        if (stage<stages.Count)
+            stages[stage].Emit();
+            */
+    }
+
+    internal void NotifyWin()
+    {
+        StartCoroutine(NotifyWinI());
+    }
+
+
+    IEnumerator NotifyWinI()
+    {
+     
+        winUi.SetActive(true);
+
+
+        yield return new WaitForSeconds(2f);
+      
+
+        SceneManager.LoadScene("title");
         /*winUi.SetActive(false);
         float pos = 0;
         float initX = 0 + stage * 20;
