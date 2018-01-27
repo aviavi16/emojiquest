@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject shovel;
 
     private Clickable targetClickable = null;
-
+    private bool readyToPlay = false;
     private float lastClickTime = -1;
     private int wonStages = 0;
 
@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     public void ReadyToPlay()
     {
+        readyToPlay = true;
         stages[0].Emit();
 
     }
@@ -55,6 +56,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!readyToPlay)
+            return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene(0);
