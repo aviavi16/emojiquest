@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject winUi;
 
+    public float cameraLeftBorder=0;
+    public float cameraRightBorder = 100;
     public int stage;
 
     public Camera cam;
