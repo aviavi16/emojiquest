@@ -21,6 +21,7 @@ public class SocketManager : MonoBehaviour {
     public Text uiChatLog = null;
     public bool ready = false;
     public bool notified = false;
+    public bool firstMessageSent = false;
 
     public Socket socket = null;
     protected List<string> chatLog = new List<string>();
@@ -102,9 +103,15 @@ public class SocketManager : MonoBehaviour {
 
                 // Access to Unity UI is not allowed in a background thread, so let's put into a shared variable
                 Debug.Log("gibrish2 "+str);
+                Debug.Log("im here");
+                if (!firstMessageSent)
+                {
+                    Debug.Log("im here2");
+                    firstMessageSent = true;
+                }
                 //Debug.Log(data.ToString()[0].GetHashCode());
 
-             lock (chatLog)
+                lock (chatLog)
               {
                     chatLog.Add(str);
                }
@@ -113,6 +120,11 @@ public class SocketManager : MonoBehaviour {
 
            
         }
+    }
+
+    public bool SentFirstMessage()
+    {
+        return firstMessageSent;
     }
 
     void DoClose()
