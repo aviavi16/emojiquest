@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
       
 
-        SceneManager.LoadScene("title");
+        SceneManager.LoadScene("stage3");
         /*winUi.SetActive(false);
         float pos = 0;
         float initX = 0 + stage * 20;
