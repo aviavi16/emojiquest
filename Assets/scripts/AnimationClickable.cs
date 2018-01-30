@@ -11,6 +11,7 @@ public class AnimationClickable : Clickable {
 
     override public void DoAction()
     {
+        GetComponent<Animator>().SetInteger("SceneVer",GameManager.instance.getSceneVer());
         GetComponent<Animator>().SetTrigger("Use");
     }
     

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    //TODO  change the mission text
+
     public static GameManager instance = null;
 
     public GameObject winUi;
@@ -22,28 +24,40 @@ public class GameManager : MonoBehaviour
     public MainChar mainChar;
     public GameObject shovel;
 
+
     private Clickable targetClickable = null;
     private bool readyToPlay = false;
     private float lastClickTime = -1;
     private int wonStages = 0;
 
+    [SerializeField]
+    private int sceneVer;
+
+
 
     public List<StageDef> stages;
 
 
-    private float minX = -10;
-    private float maxX = -4.5f;
+    public float minX = -10;
+    public float maxX = -4.5f;
 
-    void Start()
+    void Awake()
     {
         if (instance != null)
             throw new System.Exception("singelton not null");
         instance = this;
+        
+    }
+
+    void Start()
+    {
+        binocular.setActive();
         stage = 0;
         winUi.SetActive(false);
         successUi.SetActive(false);
         socketManager = GetComponent<SocketManager>();
         shovel.SetActive(false);
+
     }
 
     public void ReadyToPlay()
@@ -119,6 +133,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(c.gameObject);
             shovel.SetActive(true);
+            if(sceneVer == 2)
+            {
+                GameObject blockingMindFuck = GameObject.Find("BlockingMindFuck");
+                Destroy(blockingMindFuck);
+            }
             return;
         }
 
@@ -198,8 +217,8 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
       
-
-        SceneManager.LoadScene("stage3");
+        //the name of the scene in which the roles change
+        SceneManager.LoadScene("title- SceneVersion2");
         /*winUi.SetActive(false);
         float pos = 0;
         float initX = 0 + stage * 20;
@@ -222,4 +241,9 @@ public class GameManager : MonoBehaviour
     public float GetMinX() { return minX; }
     public float GetMaxX() { return maxX; }
     public void SetMaxX(float val) { maxX = val; }
+
+    public int getSceneVer()
+    {
+        return sceneVer; 
+    }
 }
