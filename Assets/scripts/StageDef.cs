@@ -63,7 +63,7 @@ public class StageDef  {
     public void Emit()
     {
         Debug.Log("emitted");
-        GameManager.instance.socketManager.socket.Emit("mission", new string[] { toSend});
+        GameManager.instance.socketManager.socket.Emit("mission", new string[] { toSend });
     }
 
 

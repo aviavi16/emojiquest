@@ -32,17 +32,20 @@ public class MainChar : MonoBehaviour {
 
         float tvel = vel * Time.deltaTime;
 
-       
-     //   Debug.Log("x=" + x + " tvel=" + tvel+" targetX="+targetX);
+
+        //   Debug.Log("x=" + x + " tvel=" + tvel+" targetX="+targetX);
         if (Mathf.Abs(diff) <= tvel)
         {
             x = targetX;
             moveMode = false;
             if (callback)
-                GameManager.instance.ReachedTarget();
-        } 
+              LevelManager.instance.ReachedTarget();
+        }
         else
+        {
+            //GameManager.instance.DebugLog("x, tvel, sign: ", "" + tvel + ", " + x + ", " + Mathf.Sign(diff));
             x += tvel * Mathf.Sign(diff);
+        }
         //Debug.Log("x=" + x + " tvel=" + tvel + " targetX=" + targetX);
 
         transform.position = new Vector3(x, p.y, p.z);
@@ -54,7 +57,7 @@ public class MainChar : MonoBehaviour {
     public void SetGoTo(float x)
     {
 
-        targetX = Mathf.Clamp(x,GameManager.instance.GetMinX(),GameManager.instance.GetMaxX());
+        targetX = Mathf.Clamp(x,LevelManager.instance.GetMinX(), LevelManager.instance.GetMaxX());
         callback = Mathf.Abs(targetX - x) <= 0.5f;
         moveMode = true;
     }

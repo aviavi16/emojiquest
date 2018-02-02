@@ -127,7 +127,7 @@ public class SocketManager : MonoBehaviour {
         return firstMessageSent;
     }
 
-    void DoClose()
+    public void DoClose()
     {
         if (socket != null)
         {

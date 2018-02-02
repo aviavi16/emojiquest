@@ -16,6 +16,6 @@ public class CameraFollow : MonoBehaviour {
     void Update()
     {
         float x = follow.position.x;
-        x = Mathf.Clamp(x, GameManager.instance.cameraLeftBorder, GameManager.instance.cameraRightBorder);
+        x = Mathf.Clamp(x, LevelManager.instance.cameraLeftEdge.transform.position.x, LevelManager.instance.cameraRightEdge.transform.position.x);
         transform.position = new Vector3(x, transform.position.y, transform.position.z);
     }}
