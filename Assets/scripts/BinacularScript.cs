@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,4 +21,9 @@ public class BinacularScript : MonoBehaviour {
            // Destroy(this.gameObject);
         }
 	}
+
+    public void setActive()
+    {
+        gameObject.SetActive(true);
+    }
 }

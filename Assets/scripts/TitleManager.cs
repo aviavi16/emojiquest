@@ -21,4 +21,9 @@ public class TitleManager : MonoBehaviour {
     {
         SceneManager.LoadScene(1);
     }
+
+    public void ClickStart2()
+    {
+        SceneManager.LoadScene(3);
+    }
 }
