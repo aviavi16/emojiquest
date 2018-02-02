@@ -23,19 +23,34 @@ public class LevelManager : Singleton<LevelManager>
     public MainChar mainChar;
     public GameObject shovel;
 
+    public List<StageDef> stages;
+
     private Clickable targetClickable = null;
     private float lastClickTime = -1;
     private int wonStages = 0;
+    private int sceneVer = 1;
 
-    public List<StageDef> stages;
+    [SerializeField]
+    private GameObject debugText;
+    [SerializeField]
+    private Text uiChatLog = null;
 
-  
+
+
 
     void Start()
     {
         //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         
         GameManager.instance.levelManager = this;
+        if (debugText == null)
+        {
+            GameManager.instance.debugText = debugText;
+        }
+        if (uiChatLog == null)
+        {
+            GameManager.instance.socketManager.uiChatLog = uiChatLog;
+        }
 
         stage = 0;
         winUi.SetActive(false);
@@ -216,4 +231,6 @@ public class LevelManager : Singleton<LevelManager>
     public float GetMinX() { return characterLeftEdge.transform.position.x; }
     public float GetMaxX() { return characterRightEdge.transform.position.x; }
     public void SetMaxX(float val) { characterRightEdge.transform.position = new Vector3( val, characterRightEdge.transform.position.y, characterRightEdge.transform.position.z ); }
+
+    public int getSceneVer() { return sceneVer; }
 }

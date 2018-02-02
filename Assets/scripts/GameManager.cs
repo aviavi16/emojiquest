@@ -15,8 +15,7 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField]
     private bool debugMode = false;
-    [SerializeField]
-    private GameObject debugText;
+    public GameObject debugText;
     private int debugLines = 0;
     private string debugTextString = "";
 
@@ -26,7 +25,6 @@ public class GameManager : Singleton<GameManager>
     {
         socketManager = GetComponent<SocketManager>();
         
-        debugText.GetComponent<Text>().enabled = debugMode;
         DebugLog("Beginning Game");
     }
     
