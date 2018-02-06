@@ -71,7 +71,7 @@ public class LevelManager : Singleton<LevelManager>
 
         if (Input.GetMouseButtonDown(0))
         {
-            GameManager.instance.DebugLog("Input.GetMouseButtonDown(0)", "" + Input.GetMouseButtonDown(0), gameObject);
+            //GameManager.instance.DebugLog("Input.GetMouseButtonDown(0)", "" + Input.GetMouseButtonDown(0), gameObject);
             if (binocular.gameObject.activeSelf)
                 return;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -231,6 +231,7 @@ public class LevelManager : Singleton<LevelManager>
     public float GetMinX() { return characterLeftEdge.transform.position.x; }
     public float GetMaxX() { return characterRightEdge.transform.position.x; }
     public void SetMaxX(float val) { characterRightEdge.transform.position = new Vector3( val, characterRightEdge.transform.position.y, characterRightEdge.transform.position.z ); }
+    public void SetMinX(float val) { characterLeftEdge.transform.position = new Vector3(val, characterLeftEdge.transform.position.y, characterLeftEdge.transform.position.z); }
 
     public int getSceneVer() { return sceneVer; }
 }

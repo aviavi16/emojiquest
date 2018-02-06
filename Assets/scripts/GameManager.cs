@@ -34,7 +34,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (!readyToPlay)
         {
-            DebugLog("readyToPlay", ""+ readyToPlay, gameObject);
+            //DebugLog("readyToPlay", ""+ readyToPlay, gameObject);
             return;
         }
 
@@ -66,8 +66,9 @@ public class GameManager : Singleton<GameManager>
         Debug.Log(text, go);
         if (debugMode)
         {
-            debugTextString = text + "\n" + debugTextString;
-            debugText.GetComponent<Text>().text = "lines: " + ++debugLines + "\n" + debugTextString;
+            debugLines++;
+            debugTextString = debugLines + ": " + text + "\n" + debugTextString;
+            debugText.GetComponent<Text>().text = "lines: " + debugLines + "\n" + debugTextString;
         }
     }
     public void DebugLog(string text, GameObject go = null)

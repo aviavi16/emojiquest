@@ -14,7 +14,7 @@ public class SocketManager : MonoBehaviour {
         public string msg;
     };
 
-    public string serverURL = "http://35.225.150.27";
+    string serverURL = "http://syberpuppy.com";
 
     public InputField uiInput = null;
     public Button uiSend = null;
@@ -34,9 +34,9 @@ public class SocketManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Debug.Log("start connect");
+        GameManager.instance.DebugLog("start connect");
         DoOpen();
-        Debug.Log("start");
+        GameManager.instance.DebugLog("start");
 
        
     }
@@ -86,9 +86,17 @@ public class SocketManager : MonoBehaviour {
 
     void DoOpen()
     {
+        //int maxSkips = 10000;
+        //int skips = maxSkips;
         if (socket == null)
         {
             socket = IO.Socket(serverURL);
+            //--skips;
+            //if (skips < 1)
+            //{
+            //    GameManager.instance.DebugLog("Socket is null: " + (socket == null));
+            //    skips = maxSkips;
+            //}
 
             socket.On(Socket.EVENT_CONNECT, () => {
                 Debug.Log("ready");
@@ -112,9 +120,9 @@ public class SocketManager : MonoBehaviour {
                 //Debug.Log(data.ToString()[0].GetHashCode());
 
                 lock (chatLog)
-              {
+                {
                     chatLog.Add(str);
-               }
+                }
             });
 
 
