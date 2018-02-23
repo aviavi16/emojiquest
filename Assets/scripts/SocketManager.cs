@@ -14,8 +14,12 @@ public class SocketManager : MonoBehaviour {
         public string msg;
     };
 
+<<<<<<< HEAD
     string serverURL = "http://syberpuppy.com";
     //string serverURL = "http://35.225.150.27";
+=======
+    string serverURL = "http://35.225.150.27";//syberpuppy.com";
+>>>>>>> 60498e52b1b42066455bfb971f73e7af67bba468
 
     public InputField uiInput = null;
     public Button uiSend = null;
@@ -38,6 +42,8 @@ public class SocketManager : MonoBehaviour {
         GameManager.instance.DebugLog("start connect");
         DoOpen();
         GameManager.instance.DebugLog("start");
+        
+
 
        
     }
