@@ -15,10 +15,10 @@ public class CameraFollow : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (LevelManager.instance != null)
+        if (Level1Manager.instance != null)
         {
             float x = follow.position.x;
-            x = Mathf.Clamp(x, LevelManager.instance.cameraLeftEdge.transform.position.x, LevelManager.instance.cameraRightEdge.transform.position.x);
+            x = Mathf.Clamp(x, Level1Manager.instance.cameraLeftEdge.transform.position.x + (GetComponent<Camera>().orthographicSize), Level1Manager.instance.cameraRightEdge.transform.position.x - GetComponent<Camera>().orthographicSize);
             transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
     }

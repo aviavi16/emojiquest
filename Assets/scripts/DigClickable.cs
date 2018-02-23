@@ -23,7 +23,7 @@ public class DigClickable : Clickable {
         if (Mathf.Abs(chest.transform.position.x -1- x) < 0.5f)
         {
             chest.SetActive(true);
-            LevelManager.instance.NotifyWin();
+            Level1Manager.instance.NotifyWin();
         }
     }
 }

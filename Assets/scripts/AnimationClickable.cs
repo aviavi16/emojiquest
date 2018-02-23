@@ -27,13 +27,14 @@ public class AnimationClickable : Clickable {
         //GetComponent<Renderer>().material.color = srcColor;
     }
 
-    public void SetMinX(float val)
+    public void SetMinXtoCameraEdge()
     {
-        GameManager.instance.levelManager.SetMinX(val);
+        Level1Manager.instance.SetMinX(Level1Manager.instance.cameraLeftEdge.transform.position.x);
     }
 
-    public void SetMaxX(float val)
+
+    public void SetMaxXtoCameraEdge()
     {
-        GameManager.instance.levelManager.SetMaxX(val);
+        Level1Manager.instance.SetMaxX(Level1Manager.instance.cameraRightEdge.transform.position.x);
     }
 }

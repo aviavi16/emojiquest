@@ -15,6 +15,7 @@ public class SocketManager : MonoBehaviour {
     };
 
     string serverURL = "http://syberpuppy.com";
+    //string serverURL = "http://35.225.150.27";
 
     public InputField uiInput = null;
     public Button uiSend = null;
@@ -44,8 +45,16 @@ public class SocketManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //GameManager.instance.DebugLog("LevelManager.stages.Count()", levelManager.stages.Count + "");
+
+        GameManager.instance.DebugLog("ready, !notified", "" + ready + ", " + (!notified));
+
+
         if (ready && !notified)
         {
+            //GameManager.instance.DebugLog("LevelManager.stages.Count()", levelManager.stages.Count + "");
+            GameManager.instance.DebugLog("SocketManager.Update: GameManager.instance.ReadyToPlay()");
+
             GameManager.instance.ReadyToPlay();
             notified = true;
         }
@@ -86,18 +95,10 @@ public class SocketManager : MonoBehaviour {
 
     void DoOpen()
     {
-        //int maxSkips = 10000;
-        //int skips = maxSkips;
         if (socket == null)
         {
             socket = IO.Socket(serverURL);
-            //--skips;
-            //if (skips < 1)
-            //{
-            //    GameManager.instance.DebugLog("Socket is null: " + (socket == null));
-            //    skips = maxSkips;
-            //}
-
+            
             socket.On(Socket.EVENT_CONNECT, () => {
                 Debug.Log("ready");
                 ready = true;

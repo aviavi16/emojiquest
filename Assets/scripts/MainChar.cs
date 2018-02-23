@@ -39,7 +39,7 @@ public class MainChar : MonoBehaviour {
             x = targetX;
             moveMode = false;
             if (callback)
-              LevelManager.instance.ReachedTarget();
+              Level1Manager.instance.ReachedTarget();
         }
         else
         {
@@ -57,7 +57,7 @@ public class MainChar : MonoBehaviour {
     public void SetGoTo(float x)
     {
 
-        targetX = Mathf.Clamp(x,LevelManager.instance.GetMinX(), LevelManager.instance.GetMaxX());
+        targetX = Mathf.Clamp(x,Level1Manager.instance.GetMinX(), Level1Manager.instance.GetMaxX());
         callback = Mathf.Abs(targetX - x) <= 0.5f;
         moveMode = true;
     }

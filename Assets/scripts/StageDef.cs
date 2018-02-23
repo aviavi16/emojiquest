@@ -62,8 +62,12 @@ public class StageDef  {
 
     public void Emit()
     {
-        Debug.Log("emitted");
-        GameManager.instance.socketManager.socket.Emit("mission", new string[] { toSend });
+        if (!GameManager.instance.localOnly)
+        {
+            GameManager.instance.DebugLog("GameManager.instance.socketManager.socket==null", "" + (GameManager.instance.socketManager.socket == null));
+            GameManager.instance.socketManager.socket.Emit("mission", new string[] { toSend });
+            GameManager.instance.DebugLog("emitted");
+        }
     }
 
 
